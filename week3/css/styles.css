@@ -10,7 +10,7 @@ header {
   margin-bottom: 10px;
 }
 
-header h1 {
+h1 {
   color: #1050aa;
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 2.2em;
@@ -21,7 +21,32 @@ header h1 {
 }
 
 .experience, .education {
-  border: 2px dashed orange;
+  border: 2px dashed brown;
   margin: 10px 0;
   padding: 10px;
+}
+
+header a {
+  margin: 0 5px;
+}
+
+header a[href*="github"]:hover {
+  color: red;
+}
+
+h2::first-letter {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+header a[href*="github"]::after {
+  content: url("../images/GitHub-Mark-32px.png");
+}
+
+header a:last-child {
+  margin-left: 20px;
+}
+
+.education .education-list > li:first-child{
+  font-style: italic;
 }
