@@ -24,7 +24,8 @@ header a {
   margin: 0 5px;
 }
 
-.bordered {
-  border: 2px dashed darkslateblue;
+.experience, .education {
+  border: 2px dashed orange;
   margin: 10px 0;
+  padding: 10px;
 }
