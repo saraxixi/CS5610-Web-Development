@@ -1,0 +1,30 @@
+body {
+  background-color: rgb(231, 225, 214);
+  font-family: 'Roboto', sans-serif;
+}
+
+header {
+  text-align: center;
+  border-bottom: 2px dotted darkslateblue;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+header h1 {
+  color: #1050aa;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 2.2em;
+}
+
+#role {
+  font-weight: bold;
+}
+
+header a {
+  margin: 0 5px;
+}
+
+.bordered {
+  border: 2px dashed darkslateblue;
+  margin: 10px 0;
+}
