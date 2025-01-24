@@ -64,3 +64,12 @@ header a[href*=".edu"]::before {
   content: url("../images/link.png");
   margin-right: 5px;
 }
+
+.skills li:last-child {
+  font-size: 1.3rem;
+  background-color: rgba(120, 120, 120, 0.2);
+}
+
+header a:visited {
+  color: rgb(237, 122, 127)
+}
