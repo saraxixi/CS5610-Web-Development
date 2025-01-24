@@ -41,6 +41,7 @@ h2::first-letter {
 
 header a[href*="github"]::after {
   content: url("../images/GitHub-Mark-32px.png");
+  margin-left: 5px;
 }
 
 header a:last-child {
@@ -53,4 +54,13 @@ header a:last-child {
 
 .skills li {
   list-style-type: none;
+}
+
+.experience > ul > li:not(:first-child) {
+  color: darkgreen;
+}
+
+header a[href*=".edu"]::before {
+  content: url("../images/link.png");
+  margin-right: 5px;
 }
