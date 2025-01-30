@@ -4,8 +4,18 @@ body {
   margin: 0 auto;
 }
 
+main {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
 .card {
   display: grid;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px;
   grid-template-rows: 200px min-content;
 }
 
@@ -16,12 +26,15 @@ body {
 }
 
 .tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   margin: 0;
-  padding: 0;
+  padding: 10px 0;
   list-style: none;
 }
 
-.tags > * {
+.tags > li {
   background-color: #999;
   color: #fff;
   padding: 0.2em 0.8em;
