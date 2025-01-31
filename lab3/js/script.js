@@ -15,3 +15,24 @@ const prices = {
       pudding: 1.0
   }
 };
+
+function calculateTotalPrice(flavor, size, toppings) {
+  let basePrice = prices.flavors[flavor] || 0;
+  let sizeMultiplier = prices.sizes[size] || 1;
+  let toppingsPrice = toppings.reduce((total, topping) => total + (prices.toppings[topping] || 0), 0)
+  return sizeMultiplier * (basePrice + toppingsPrice);
+}
+
+function displayOrderSummary(order) {
+  console.log(`You ordered a ${order.size} ${order.flavor} bubble tea with ${order.toppings.join(', ')}.`);
+  console.log(`Total Price: $${order.total}.`);
+}
+
+function placeOrder(flavor, size, toppings) {
+  let finalPrice = calculateTotalPrice(flavor, size, toppings);
+  let order = { flavor, size, toppings, finalPrice };
+  displayOrderSummary(order);
+}
+
+// Test the function
+placeOrder('mango', 'medium', ['boba', 'pudding']);
