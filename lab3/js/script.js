@@ -25,7 +25,7 @@ function calculateTotalPrice(flavor, size, toppings) {
 
 function displayOrderSummary(order) {
   console.log(`You ordered a ${order.size} ${order.flavor} bubble tea with ${order.toppings.join(', ')}.`);
-  console.log(`Total Price: $${order.total}.`);
+  console.log(`Total Price: $${order.finalPrice.toFixed(2)}.`);
 }
 
 function placeOrder(flavor, size, toppings) {
