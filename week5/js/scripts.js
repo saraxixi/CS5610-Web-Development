@@ -59,3 +59,27 @@ function highlightGreenItems() {
     }
   });
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+  const button = document.getElementById("updateImage");
+  const image = document.getElementById("shoppingCart");
+
+  button.addEventListener("click", function() {
+    if (button.textContent === "Click Me!") {
+      button.textContent = "Clicked!";
+    } else {
+      button.textContent = "Click Me!";
+    }
+  });
+
+  function updateImage() {
+    image.src = "./images/shoppingCart.png";
+    image.alt = "Updated Shopping Cart";
+    image.width = "200";
+    image.height = "200";
+
+    button.removeEventListener("click", updateImage);
+  }
+
+  button.addEventListener("click", updateImage, { once: true });
+});
