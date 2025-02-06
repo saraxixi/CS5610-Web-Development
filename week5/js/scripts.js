@@ -83,13 +83,35 @@ document.addEventListener("DOMContentLoaded", function() {
 
   button.addEventListener("click", updateImage, { once: true });
 
-  const colorButtons = document.querySelectorAll(".color-btn");
+  // const colorButtons = document.querySelectorAll(".color-btn");
 
-  function changeBackgroundColor(event) {
-    document.body.style.backgroundColor = event.target.textContent.toLowerCase();
-  }
+  // function changeBackgroundColor(event) {
+  //   document.body.style.backgroundColor = event.target.textContent.toLowerCase();
+  // }
 
-  colorButtons.forEach(button => {
-    button.addEventListener("mouseover", changeBackgroundColor);
+  // colorButtons.forEach(button => {
+  //   button.addEventListener("mouseover", changeBackgroundColor);
+  // });
+
+  const colorContainer = document.querySelector("#colorContainer");
+
+  colorContainer.addEventListener("mouseover", function(event) {
+    if (event.target.tagName === "BUTTON") {
+      event.target.style.backgroundColor = "green";
+    }
+  });
+
+  colorContainer.addEventListener("mouseout", function(event) {
+    if (event.target.tagName === "BUTTON") {
+      event.target.style.backgroundColor = "";
+    }
+  });
+
+  const shoppingList = document.querySelector(".shopping");
+  
+  shoppingList.addEventListener("click", function(event) {
+    if (event.target.tagName === "LI") {
+      event.target.innerHTML = `<del>${event.target.textContent}</del>`;
+    }
   });
 });
