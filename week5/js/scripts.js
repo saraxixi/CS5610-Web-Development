@@ -38,3 +38,24 @@ function populateShopingList() {
 
 // function call to populate the shopping list
 populateShopingList();
+
+// function to change list marker to square
+function applySquareMarker() {
+  let ul = document.querySelector(".shopping");
+
+  // use classList.add()
+  ul.classList.add("squareList");
+
+  // use setAttribute()
+  // ul.setAttribute("class", "squareList");
+}
+
+function highlightGreenItems() {
+  let listItems = document.querySelectorAll(".shopping li");
+
+  listItems.forEach(item => {
+    if (item.textContent.toLocaleLowerCase().includes("green")) {
+      item.classList.add("greenText");
+    }
+  });
+}
