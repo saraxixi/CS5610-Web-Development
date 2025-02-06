@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bubble Tea Order</title>
+  <link rel="stylesheet" href="./css/styles.css">
+  <script defer src="./js/script.js"></script>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Bubble Tea Order From</h2>
+    <form>
+      <label for="flavor">Choose a flavor:</label>
+      <select id="flavor" name="flavor">
+        <option value="original">Original</option>
+        <option value="mango">Mango</option>
+        <option value="strawberry">Strawberry</option>
+      </select>
+
+      <label for="size">Choose a size:</label>
+      <select id="flavor" name="flavor">
+        <option value="">--Please choose a size--</option>
+        <option value="small">Small</option>
+        <option value="medium">Medium</option>
+        <option value="large">Large</option>
+      </select>
+
+      <label for="toppings">Choose toppings:</label>
+      <select id="toppings" name="toppings" multiple>
+        <option value="boba">Boba</option>
+        <option value="jelly">Jelly</option>
+        <option value="pudding">Pudding</option>
+      </select>
+
+      <button type="submit">Place Order</button>
+    </form>
+  </div>
+</body>
+</html>
