@@ -11,3 +11,12 @@ function calculateArea(radius) {
   }
   return Math.PI * radius * radius;
 }
+
+//function to call the getRadius and calculateArea functions
+function calculateCircleArea() {
+  let radius = getRadius();
+  let area = calculateArea(radius);
+  
+  document.getElementById("radius").textContent = `Value provided by the user: ${radius}`;
+  document.getElementById("result").textContent = `Area: ${area}`;
+}
