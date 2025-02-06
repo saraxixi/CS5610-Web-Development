@@ -64,12 +64,19 @@ document.addEventListener("DOMContentLoaded", function() {
   const button = document.getElementById("updateImage");
   const image = document.getElementById("shoppingCart");
 
+  if (localStorage.getItem("buttonText")) {
+    button.textContent = localStorage.getItem("buttonText");
+  }
+
   button.addEventListener("click", function() {
     if (button.textContent === "Click Me!") {
       button.textContent = "Clicked!";
     } else {
       button.textContent = "Click Me!";
     }
+
+    // Save the button text to local storage
+    localStorage.setItem("buttonText", button.textContent);
   });
 
   function updateImage() {
@@ -108,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   const shoppingList = document.querySelector(".shopping");
-  
+
   shoppingList.addEventListener("click", function(event) {
     if (event.target.tagName === "LI") {
       event.target.innerHTML = `<del>${event.target.textContent}</del>`;
