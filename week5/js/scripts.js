@@ -25,7 +25,7 @@ function calculateCircleArea() {
 let shoppingItems = ["bread", "cheese", "green pepper"];
 
 // function to add an item to the shopping list
-function populateShopingList() {
+function populateShoppingList() {
   let ul = document.querySelector(".shopping");
   ul.innerHTML = "";
 
@@ -37,7 +37,7 @@ function populateShopingList() {
 }
 
 // function call to populate the shopping list
-populateShopingList();
+populateShoppingList();
 
 // function to change list marker to square
 function applySquareMarker() {
@@ -82,4 +82,14 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   button.addEventListener("click", updateImage, { once: true });
+
+  const colorButtons = document.querySelectorAll(".color-btn");
+
+  function changeBackgroundColor(event) {
+    document.body.style.backgroundColor = event.target.textContent.toLowerCase();
+  }
+
+  colorButtons.forEach(button => {
+    button.addEventListener("mouseover", changeBackgroundColor);
+  });
 });
