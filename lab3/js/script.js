@@ -75,11 +75,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // update order details text
     orderDetails.innerHTML = 
-      `
-        <strong>Flavor:</strong> ${order.flavor} <br>
-        <strong>Size:</strong> ${order.size} <br>
-        <strong>Toppings:</strong> ${toppingsText} <br>
-        <strong>Total Price:</strong> $${order.finalPrice.toFixed(2)}
-      `;
+      `You have ordered a ${order.size} ${order.flavor} boba with ${toppingsText} toppings.Total price: $${order.finalPrice.toFixed(2)}`;
   }
 });
