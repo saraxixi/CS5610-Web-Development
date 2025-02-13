@@ -17,3 +17,15 @@
 
 const logger = require('./logger.js');
 logger.log();
+
+const express = require('express');
+const app = express();
+
+app.get('/', function(req, res) {
+  res.send('Hello and welcome to my site!');
+});
+
+const port = 3000;
+app.listen(port, function() { 
+  console.log(`Example app listening on port ${port}!`); 
+});
