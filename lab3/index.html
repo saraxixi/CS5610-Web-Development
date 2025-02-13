@@ -8,8 +8,8 @@
   <script defer src="./js/script.js"></script>
 </head>
 <body>
+  <h1>Bubble Tea Order From</h1>
   <div class="form-container">
-    <h2>Bubble Tea Order From</h2>
     <form>
       <label for="flavor">Choose a flavor:</label>
       <select id="flavor" name="flavor">
@@ -19,7 +19,7 @@
       </select>
 
       <label for="size">Choose a size:</label>
-      <select id="flavor" name="flavor">
+      <select id="size" name="size">
         <option value="">--Please choose a size--</option>
         <option value="small">Small</option>
         <option value="medium">Medium</option>
@@ -33,8 +33,13 @@
         <option value="pudding">Pudding</option>
       </select>
 
-      <button type="submit">Place Order</button>
+      <button id="place-order" type="submit">Place Order</button>
     </form>
+  </div>
+
+  <div id="order-summary">
+    <h2>Order Summary</h2>
+    <p>Your order details will appear here.</p>
   </div>
 </body>
 </html>
