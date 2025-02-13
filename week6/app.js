@@ -20,12 +20,25 @@ logger.log();
 
 const express = require('express');
 const app = express();
+const port = 3000;
 
-app.get('/', function(req, res) {
+app.get('/', (req, res) => {
   res.send('Hello and welcome to my site!');
 });
 
-const port = 3000;
+app.get('/tasks', (req, res) =>{
+  res.send('<h1>List of all the tasks</h1>');
+  console.log(req.params);
+  console.log(req.query);
+});
+
+app.get('/tasks/:taskId', (req, res) => {
+  // res.send('<h1>List of all the tasks</h1>');
+  const taskId = req.params.taskId;
+  console.log(req.params.taskId);
+  res.send(`<p>You are viewing task ${taskId}</p>`);
+});
+
 app.listen(port, function() { 
   console.log(`Example app listening on port ${port}!`); 
 });
