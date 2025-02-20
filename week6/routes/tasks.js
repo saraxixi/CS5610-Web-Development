@@ -16,13 +16,22 @@ router.get('/', (req, res) => {
 router.get('/:taskId', (req, res) => {
   const taskId = req.params.taskId;
   axios.get(`https://jsonplaceholder.typicode.com/todos/${taskId}`)
-    .then(response => {
-      const task = response.data;
-      res.render('task', { id: task.id, title: task.title, completed: task.completed });
+    .then(taskResponse => {
+      const task = taskResponse.data;
+      return axios.get(`https://jsonplaceholder.typicode.com/users/${task.userId}`)
+        .then(userResponse => {
+          const user = userResponse.data;
+          res.render('task', {
+            id: task.id,
+            title: task.title,
+            completed: task.completed,
+            userName: user.name
+          });
+        });
     })
     .catch(error => {
-      console.error('Error fetching task:', error);
-      res.status(500).send('Failed to fetch task');
+      console.error('Error fetching data:', error);
+      res.status(500).send('Failed to fetch task details');
     });
 });
 
