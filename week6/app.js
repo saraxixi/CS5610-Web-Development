@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var fs = require('fs');
+const util = require('util');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -22,22 +24,30 @@ app.use(express.static(path.join(__dirname, 'public')));
 const writeFile = util.promisify(fs.writeFile);
 const readFile = util.promisify(fs.readFile);
 
-app.get('/write', async (req, res) => {
-  try {
-    await writeFile('data.txt', 'This is a message for you!');
-    res.send('File written successfully!');
-  } catch (err) {
-    res.status(500).send('Error writing file');
-    console.error(err);
-  }
+app.get('/write-then', (req, res) => {
+  writeFile('data.txt', 'This is a message for you!')
+    .then(() => {
+      console.log('File written successfully');
+      return readFile('data.txt', 'utf-8'); // 读取文件
+    })
+    .then((data) => {
+      res.send(`File content: ${data}`);
+    })
+    .catch((err) => {
+      res.status(500).send('Error writing or reading file');
+      console.error(err);
+    });
 });
 
-app.get('/read', async (req, res) => {
+app.get('/write-async', async (req, res) => {
   try {
+    await writeFile('data.txt', 'This is a message for you!');
+    console.log('File written successfully');
+
     const data = await readFile('data.txt', 'utf-8');
     res.send(`File content: ${data}`);
   } catch (err) {
-    res.status(500).send('Error reading file');
+    res.status(500).send('Error writing or reading file');
     console.error(err);
   }
 });
