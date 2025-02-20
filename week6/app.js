@@ -23,22 +23,11 @@ const app = express();
 const port = 3000;
 
 app.use(express.static('public'));
+const tasksRouter = require('./routes/tasks.js');
+app.use('/tasks', tasksRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello and welcome to my site!');
-});
-
-app.get('/tasks', (req, res) =>{
-  res.send('<h1>List of all the tasks</h1>');
-  console.log(req.params);
-  console.log(req.query);
-});
-
-app.get('/tasks/:taskId', (req, res) => {
-  // res.send('<h1>List of all the tasks</h1>');
-  const taskId = req.params.taskId;
-  console.log(req.params.taskId);
-  res.send(`<p>You are viewing task ${taskId}</p>`);
 });
 
 app.listen(port, function() { 
