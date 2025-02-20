@@ -19,6 +19,29 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+const writeFile = util.promisify(fs.writeFile);
+const readFile = util.promisify(fs.readFile);
+
+app.get('/write', async (req, res) => {
+  try {
+    await writeFile('data.txt', 'This is a message for you!');
+    res.send('File written successfully!');
+  } catch (err) {
+    res.status(500).send('Error writing file');
+    console.error(err);
+  }
+});
+
+app.get('/read', async (req, res) => {
+  try {
+    const data = await readFile('data.txt', 'utf-8');
+    res.send(`File content: ${data}`);
+  } catch (err) {
+    res.status(500).send('Error reading file');
+    console.error(err);
+  }
+});
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
