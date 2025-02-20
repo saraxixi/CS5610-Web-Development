@@ -8,12 +8,13 @@ const util = require('util');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var tasksRouter = require('./routes/tasks');
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -28,7 +29,7 @@ app.get('/write-then', (req, res) => {
   writeFile('data.txt', 'This is a message for you!')
     .then(() => {
       console.log('File written successfully');
-      return readFile('data.txt', 'utf-8'); // 读取文件
+      return readFile('data.txt', 'utf-8');
     })
     .then((data) => {
       res.send(`File content: ${data}`);
@@ -54,6 +55,7 @@ app.get('/write-async', async (req, res) => {
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/tasks', tasksRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
