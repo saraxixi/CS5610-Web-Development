@@ -22,7 +22,11 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
+app.set('view engine', 'pug');
+app.set('views', './views');
+
 app.use(express.static('public'));
+
 const tasksRouter = require('./routes/tasks.js');
 app.use('/tasks', tasksRouter);
 
