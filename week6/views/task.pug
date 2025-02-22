@@ -4,7 +4,8 @@ html(lang="en")
     title Task Details
   body
     h1 You are viewing task #{id}
-    p Task title: #{title}
-    p Task status: #{completed ? "Completed" : "Not Completed"}
-    p #{userName} is responsible for this task
+    ul 
+      li Task title: #{title}
+      li Task status: #{completed ? "Completed" : "Not Completed"}
+      li #{userName} is responsible for this task
 
