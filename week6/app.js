@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var fs = require('fs');
 const util = require('util');
+const port = 3000;
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -72,5 +73,17 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+const db = require('./db');
+require('dotenv').config();
+console.log(process.env);
+
+app.listen(port, async function () {
+  console.log(`Server running on port ${port}`);
+  await db.connect();
+  console.log('Connected to MongoDB');
+  // db.addToDB({name: 'task1', description: 'first task'});
+  }
+);
 
 module.exports = app;
