@@ -2,8 +2,11 @@ doctype html
 html(lang="en")
   head
     title Task Details
+    link(rel="stylesheet", href="/styles.css")
   body
     h1 You are viewing task #{id}
-    p Task title: #{title}
-    p #{userName} is responsible for this task
-    p Task status: #{completed ? "Completed" : "Not Completed"}
+    ul 
+      li Task title: #{title}
+      li Task status: #{completed ? "Completed" : "Not Completed"}
+      li #{userName} is responsible for this task
+
