@@ -26,6 +26,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 const writeFile = util.promisify(fs.writeFile);
 const readFile = util.promisify(fs.readFile);
 
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+
 app.get('/write-then', (req, res) => {
   writeFile('data.txt', 'This is a message for you!')
     .then(() => {
