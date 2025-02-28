@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h2 You are viewing task #{id} using a template
+  ul
+    li The title of the task is #{title}
+    li The task is #{completed ? "completed" : "not completed"}
+    li The due date is #{dueDate || "No due date provided"}

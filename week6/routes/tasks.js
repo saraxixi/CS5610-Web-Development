@@ -31,6 +31,7 @@ router.get('/', async (req, res) => {
 router.get('/:taskId', async (req, res) => {
   try {
     const taskId = req.params.taskId;
+    console.log("Fetching task with ID:", taskId);
     const task = await db.getTaskById(taskId);
     res.render('task', {
       id: task._id,
