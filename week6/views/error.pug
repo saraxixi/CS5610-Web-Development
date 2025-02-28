@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  h1 Error Occurred
+  p= message
+  p Status Code: #{error.status}
+  pre #{error.stack}
