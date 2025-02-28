@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var fs = require('fs');
 const util = require('util');
+const port = 3000;
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -18,12 +19,16 @@ app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 const writeFile = util.promisify(fs.writeFile);
 const readFile = util.promisify(fs.readFile);
+
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
 
 app.get('/write-then', (req, res) => {
   writeFile('data.txt', 'This is a message for you!')
@@ -72,5 +77,17 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+const db = require('./db');
+require('dotenv').config();
+console.log(process.env);
+
+app.listen(port, async function () {
+  console.log(`Server running on port ${port}`);
+  await db.connect();
+  console.log('Connected to MongoDB');
+  // db.addToDB({name: 'task1', description: 'first task'});
+  }
+);
 
 module.exports = app;

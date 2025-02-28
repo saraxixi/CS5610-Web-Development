@@ -1,6 +1,22 @@
 const express = require('express');
 const axios = require('axios');
 const router = express.Router();
+const db = require('../db');
+
+router.post('/', async (req, res) => {
+  try {
+    console.log("req.body", req.body);
+    await db.addToDB(req.body)
+    // res.send('data received');
+    res.redirect('/tasks');
+  } catch (err) {
+    console.error("Error adding to DB", err);
+  }
+});
+
+router.get("/newtask", (req, res) => {
+  res.render('taskForm');
+});
 
 router.get('/', (req, res) => {
   axios.get('https://jsonplaceholder.typicode.com/todos')
