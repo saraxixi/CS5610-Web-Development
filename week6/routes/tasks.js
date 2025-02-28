@@ -28,6 +28,22 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/:taskId', async (req, res) => {
+  try {
+    const taskId = req.params.taskId;
+    const task = await db.getTaskById(taskId);
+    res.render('task', {
+      id: task._id,
+      title: task.title,
+      completed: task.completed,
+      dueDate: task.dueDate  // Include due date
+    });
+  } catch (err) {
+    console.error("Error getting task by id", err);
+    res.status(500).send('Error getting task by id');
+  }
+});
+
 // router.get('/', (req, res) => {
 //   axios.get('https://jsonplaceholder.typicode.com/todos')
 //     .then((response) => {
