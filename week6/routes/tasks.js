@@ -18,16 +18,26 @@ router.get("/newtask", (req, res) => {
   res.render('taskForm');
 });
 
-router.get('/', (req, res) => {
-  axios.get('https://jsonplaceholder.typicode.com/todos')
-    .then((response) => {
-      res.json(response.data);
-    })
-    .catch((err) => {
-      console.error('Error fetching data:', err);
-      res.status(500).json({ error: 'Failed to fetch tasks' });
-    });
+router.get('/', async (req, res) => {
+  try {
+    const tasks = await db.getAllTasks();
+    res.render('tasks', { tasks });
+  } catch (err) {
+    console.error("Error getting all tasks", err);
+    res.status(500).send('Error getting tasks');
+  }
 });
+
+// router.get('/', (req, res) => {
+//   axios.get('https://jsonplaceholder.typicode.com/todos')
+//     .then((response) => {
+//       res.json(response.data);
+//     })
+//     .catch((err) => {
+//       console.error('Error fetching data:', err);
+//       res.status(500).json({ error: 'Failed to fetch tasks' });
+//     });
+// });
 
 router.get('/:taskId', (req, res) => {
   const taskId = req.params.taskId;
