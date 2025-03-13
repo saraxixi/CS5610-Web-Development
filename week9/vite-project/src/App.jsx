@@ -1,11 +1,12 @@
 import React from "react";
+import Header from "../components/Header";
 
 function App() {
-  const message = "Welcome to My App";
+  const appName = "My React App";
 
   return (
     <div>
-      <h1>{message}</h1>
+      <Header appName={appName} />
     </div>
   );
 }
