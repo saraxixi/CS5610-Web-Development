@@ -5,7 +5,7 @@ function App() {
   const appName = "My React App";
 
   return (
-    <div>
+    <div className="app-container">
       <Header appName={appName} />
     </div>
   );
