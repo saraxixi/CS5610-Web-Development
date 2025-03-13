@@ -1,12 +1,8 @@
-doctype html
-html(lang="en")
-  head
-    title Task Details
-    link(rel="stylesheet", href="/styles.css")
-  body
-    h1 You are viewing task #{id}
-    ul 
-      li Task title: #{title}
-      li Task status: #{completed ? "Completed" : "Not Completed"}
-      li #{userName} is responsible for this task
+extends layout
 
+block content
+  h2 You are viewing task #{id} using a template
+  ul
+    li The title of the task is #{title}
+    li The task is #{completed ? "completed" : "not completed"}
+    li The due date is #{dueDate || "No due date provided"}

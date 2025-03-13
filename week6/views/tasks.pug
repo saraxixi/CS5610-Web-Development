@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1 All Tasks
+  ul
+    each task in tasks
+      li
+        a(href=`/tasks/${task._id}`) #{task.title}
+        | (#{task.completed ? 'completed' : 'not completed'})
