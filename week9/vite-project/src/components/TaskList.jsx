@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Task from './Task';
-import AddTask from './AddTask';
 
 function TasksList() {
   const [tasks, setTasks] = useState([
@@ -27,7 +26,6 @@ function TasksList() {
 
   return (
       <div>
-          <AddTask />
           {tasks.length > 0 ? (
               <ul>
                   {tasks.map(task => (
