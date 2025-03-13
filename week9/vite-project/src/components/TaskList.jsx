@@ -20,12 +20,22 @@ function TasksList() {
         },
     ]);
 
+    const deleteTask = (id) => {
+        setTasks(tasks.filter(task => task.id !== id));
+    };
+
     return (
-        <ul>
-            {tasks.map(task => (
-                <Task key={task.id} task={task} />
-            ))}
-        </ul>
+        <div>
+            {tasks.length > 0 ? (
+                <ul>
+                    {tasks.map(task => (
+                        <Task key={task.id} task={task} onDelete={deleteTask} />
+                    ))}
+                </ul>
+            ) : (
+                <p>No Tasks Left</p>
+            )}
+        </div>
     );
 }
 
