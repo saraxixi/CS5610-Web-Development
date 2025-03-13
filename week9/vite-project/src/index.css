@@ -14,8 +14,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
   padding: 10px;
+  width: 100%;
 }
 
 .add-task {
@@ -25,4 +25,11 @@ body {
   cursor: pointer;
   font-size: 14px;
   white-space: nowrap;
+}
+
+.task-container {
+  background-color: #f4f4f4;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
 }

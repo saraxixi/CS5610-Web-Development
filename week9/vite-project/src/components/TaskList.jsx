@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Task from './Task';
 
 function TasksList() {
     const [tasks, setTasks] = useState([
@@ -22,7 +23,7 @@ function TasksList() {
     return (
         <ul>
             {tasks.map(task => (
-                <li key={task.id}>{task.title} - {task.date}</li>
+                <Task key={task.id} task={task} />
             ))}
         </ul>
     );
