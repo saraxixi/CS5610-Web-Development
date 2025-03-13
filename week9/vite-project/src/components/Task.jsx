@@ -5,10 +5,12 @@ function Task({ task }) {
     return (
         <li>
             <div className="task-container">
-                <p>{task.title}</p>
-                <p>{task.date}</p>
+              <div className="task-content">
+                <p className='task-title'>{task.title}</p>
+                <p className='task-date'>{task.date}</p>
+              </div>
+              <RiDeleteBin5Line className='delete-icon'/>
             </div>
-            <RiDeleteBin5Line className='delete-icon'/>
         </li>
     );
 }
