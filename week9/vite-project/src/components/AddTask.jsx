@@ -13,7 +13,7 @@ function AddTask() {
     };
 
     const handleSubmit = (event) => {
-        event.preventDefault(); // Prevent page refresh
+        event.preventDefault(); // Prevents the page from refreshing
         const newTask = { title, date };
         console.log("New Task:", newTask);
     };
