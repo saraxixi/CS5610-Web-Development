@@ -12,10 +12,17 @@ function AddTask() {
         setDate(event.target.value);
     };
 
-    const handleSubmit = (event) => {
-        event.preventDefault(); // Prevent page refresh
-        const newTask = { title, date };
-        console.log("New Task:", newTask);
+    const handleSubmit = async (event) => {
+        event.preventDefault(); // Prevents the page from refreshing
+        const newTask = { title: title, date: date };
+        setTitle('');
+        setDate('');
+
+        await fetch('http://localhost:5000/tasks', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json',},
+            body: JSON.stringify(newTask),
+        });
     };
 
     return (
