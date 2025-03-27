@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
 import TaskList from "./components/TaskList";
-import {Routes, Route, Link } from "react-router"
+import {Routes, Route, Link, Outlet } from "react-router"
 import TaskDetails from "./components/TaskDetails";
+import AddTask from "./components/AddTask";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -55,7 +56,12 @@ function App() {
       </nav>
       
       <Routes>
-        <Route path="/" element={<Header toggleForm={toggleForm} showForm={showForm} appName={appName} />} />
+        <Route path="/" element={
+          <>
+          <Header toggleForm={toggleForm} showForm={showForm} appName={appName} />
+          {showForm && <AddTask/>}
+          </>
+        } />
         <Route path="/tasks" element={<TaskList tasks={tasks} setTasks={setTasks} onDelete={deleteTask} />} >
           <Route path=":taskId" element={<TaskDetails />} />
         </Route>
