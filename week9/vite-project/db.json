@@ -15,5 +15,24 @@
 	    "title": "Work on assignment 2",
 	    "date": "June 5th at 8 am"
 	  }
-	]
+	],
+	
+	"users": [
+  {
+    "id": 1,
+    "name": "Neda",
+    "task": 1
+  },
+  {
+    "id": 2,
+    "name": "Dan",
+    "task": 3
+  },
+  {
+    "id": 3,
+    "name": "Adam",
+    "task": 3
+  }
+]
 }
+
