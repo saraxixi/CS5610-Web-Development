@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
 import TaskList from "./components/TaskList";
+import {Routes, Route, Link, Outlet } from "react-router"
+import TaskDetails from "./components/TaskDetails";
 import AddTask from "./components/AddTask";
 
 function App() {
@@ -48,9 +50,24 @@ function App() {
 
   return (
     <div className="app-container">
-      <Header toggleForm={toggleForm} showForm={showForm} appName={appName} />
-      {showForm && <AddTask />}
-      <TaskList tasks={tasks} setTasks={setTasks} onDelete={deleteTask}/>
+
+      <nav>
+        <Link to="/">Home</Link> | <Link to="/tasks">Tasks</Link>
+      </nav>
+      
+      <Routes>
+        <Route path="/" element={
+          <>
+          <Header toggleForm={toggleForm} showForm={showForm} appName={appName} />
+          {showForm && <AddTask/>}
+          </>
+        } />
+        <Route path="/tasks" element={<TaskList tasks={tasks} setTasks={setTasks} onDelete={deleteTask} />} >
+          <Route path=":taskId" element={<TaskDetails />} />
+        </Route>
+        
+        <Route path="*" element={<h1>Not Found</h1>} />
+      </Routes>
     </div>
   );
 }
