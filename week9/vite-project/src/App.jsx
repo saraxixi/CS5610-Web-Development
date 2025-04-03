@@ -8,6 +8,7 @@ import Profile from "./components/Profile";
 // import LoginButton from "./components/LoginButton";
 // import LogoutButton from "./components/LogoutButton";
 import AuthenicationButton from "./components/AuthenicationButton";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 
 function App() {
@@ -71,7 +72,7 @@ function App() {
           <Route path=":taskId" element={<TaskDetails />} />
         </Route>
         
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile" element={<ProtectedRoute Component={Profile}/>} />
         <Route path="*" element={<h1>Not Found</h1>} />
       </Routes>
     </div>
