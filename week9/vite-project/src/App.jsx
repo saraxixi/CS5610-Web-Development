@@ -4,6 +4,7 @@ import TaskList from "./components/TaskList";
 import {Routes, Route, Link, Outlet } from "react-router"
 import TaskDetails from "./components/TaskDetails";
 import AddTask from "./components/AddTask";
+import Profile from "./components/Profile";
 // import LoginButton from "./components/LoginButton";
 // import LogoutButton from "./components/LogoutButton";
 import AuthenicationButton from "./components/AuthenicationButton";
@@ -56,7 +57,7 @@ function App() {
     <div className="app-container">
       <AuthenicationButton />
       <nav>
-        <Link to="/">Home</Link> | <Link to="/tasks">Tasks</Link>
+        <Link to="/">Home</Link> | <Link to="/tasks">Tasks</Link> | <Link to="/profile">Profile</Link>
       </nav>
       
       <Routes>
@@ -70,6 +71,7 @@ function App() {
           <Route path=":taskId" element={<TaskDetails />} />
         </Route>
         
+        <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<h1>Not Found</h1>} />
       </Routes>
     </div>
