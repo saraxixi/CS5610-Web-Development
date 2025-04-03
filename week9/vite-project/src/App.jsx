@@ -4,6 +4,7 @@ import TaskList from "./components/TaskList";
 import {Routes, Route, Link, Outlet } from "react-router"
 import TaskDetails from "./components/TaskDetails";
 import AddTask from "./components/AddTask";
+import LoginButton from "./components/LoginButton";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -50,7 +51,7 @@ function App() {
 
   return (
     <div className="app-container">
-
+      <LoginButton />
       <nav>
         <Link to="/">Home</Link> | <Link to="/tasks">Tasks</Link>
       </nav>
