@@ -6,6 +6,7 @@ import TaskDetails from "./components/TaskDetails";
 import AddTask from "./components/AddTask";
 import LoginButton from "./components/LoginButton";
 import LogoutButton from "./components/LogoutButton";
+import AutenticationButton from "./components/AutenticationButton";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -52,8 +53,7 @@ function App() {
 
   return (
     <div className="app-container">
-      <LoginButton />
-      <LogoutButton />
+      <AutenticationButton />
       <nav>
         <Link to="/">Home</Link> | <Link to="/tasks">Tasks</Link>
       </nav>
