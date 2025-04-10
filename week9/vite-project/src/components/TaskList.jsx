@@ -2,7 +2,7 @@ import React from 'react';
 import Task from './Task';
 import { Outlet } from 'react-router';
 
-function TasksList({ tasks, onDelete}) {
+function TasksList({ tasks=[], onDelete}) {
 
   return (
 	  <div>

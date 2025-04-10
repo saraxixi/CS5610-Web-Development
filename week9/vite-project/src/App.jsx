@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
-import TasksList from "./components/TasksList";
+import TasksList from "./components/TaskList";
 import AddTask from "./components/AddTask";
 import { Link, NavLink, Route, Routes } from "react-router";
 import TaskDetails from "./components/TaskDetails";
