@@ -11,7 +11,7 @@ export default function Auth0ProviderWithHistory({ children }) {
       authorizationParams={{
         redirect_uri: window.location.origin,
         audience: import.meta.env.VITE_AUTH0_AUDIENCE,
-        scope: "post:tasks delete:tasks",
+        // scope: "post:tasks delete:tasks",
       }}
       onRedirectCallback={(appState) => {
         navigate((appState && appState.returnTo) || window.location.pathname);

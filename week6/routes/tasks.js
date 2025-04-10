@@ -4,7 +4,7 @@ const router = express.Router();
 const axios = require("axios");
 const db = require("../db");
 const { ObjectId } = require("mongodb");
-const { auth } = require("express-oauth2-jwt-bearer");
+const { auth, requiredScopes } = require("express-oauth2-jwt-bearer");
 
 const checkJWT = auth({
   audience: process.env.AUTH0_AUDIENCE,
