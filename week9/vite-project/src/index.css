@@ -1,68 +1,127 @@
-body {
-  padding: 20px;
-}
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
 
-.app-container {
-  border: 1px solid #ccc;
-  padding: 20px;
-  margin: 20px;
-  max-width: 800px;
-  background-color: white;
-}
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  width: 100%;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-
-.add-task {
-  padding: 5px 10px;
-  border: 1px solid #000;
-  background: white;
-  cursor: pointer;
-  font-size: 14px;
-  white-space: nowrap;
+nav a {
+  margin-right: 1em;
 }
-
-.task-container {
-  background-color: #f4f4f4;
-  padding: 10px;
-  margin: 5px 0;
-  border-radius: 5px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
 }
-
-.task-content {
-  display: flex;
-  flex-direction: column;
-}
-
-.task-title {
+a.active {
   font-weight: bold;
-  margin-bottom: 5px;
+}
+a:hover {
+  color: #535bf2;
 }
 
-.task-date {
-  font-size: 0.9em;
-  color: #555;
+body {
+  margin: 0;
+  /* display: flex; */
+  /* place-items: center; */
+  min-width: 320px;
+  min-height: 100vh;
+  padding: 2rem;
 }
 
-.delete-icon {
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
   cursor: pointer;
-  color: #888;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
 }
 
+.appContainer {
+  border: darkblue 1px solid;
+  padding: 1em;
+  margin: 1em;
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.taskContainer {
+  background-color: lightblue;
+  margin: 1em;
+  padding: 1em;
+}
+
+.taskTitleIconContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .form-control {
   margin: 20px 0;
-  display:flex;
+  display: flex;
 }
 
 .form-control label {
   margin-right: 10px;
+}
+.navBar {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+nav {
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 576px) {
+  /* this will be applied to screens bigger than 576 */
+  .navBar {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  nav {
+    flex-direction: row;
+  }
+  .menuIcon {
+    display: none;
+  }
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
 }

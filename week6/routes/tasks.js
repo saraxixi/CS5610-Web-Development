@@ -1,81 +1,100 @@
-const express = require('express');
-const axios = require('axios');
+// responsible for all routing related to /tasks path
+const express = require("express");
 const router = express.Router();
-const db = require('../db');
+const axios = require("axios");
+const db = require("../db");
+const { ObjectId } = require("mongodb");
+const { auth, requiredScopes } = require("express-oauth2-jwt-bearer");
 
-router.post('/', async (req, res) => {
-  try {
-    console.log("req.body", req.body);
-    await db.addToDB(req.body)
-    // res.send('data received');
-    res.redirect('/tasks');
-  } catch (err) {
-    console.error("Error adding to DB", err);
-  }
+const checkJWT = auth({
+  audience: process.env.AUTH0_AUDIENCE,
+  issuerBaseURL: `https://${process.env.AUTH0_DOMAIN}/`,
 });
 
+router.post("/", checkJWT, async (req, res) => {
+  try {
+    // we will recieve data and write it to db
+    console.log("req.body ", req.body);
+    // call addToDB
+    const result = await db.addToDB(req.body);
+
+    res.json(result);
+
+    // res.send("data received");
+    // res.redirect("/tasks");
+  } catch (err) {
+    console.log("post handler ", err);
+  }
+});
+// show the form to add a new task
 router.get("/newtask", (req, res) => {
-  res.render('taskForm');
+  res.render("taskForm");
+});
+// this is the handler for /tasks
+router.get("/", async (req, res) => {
+  try {
+    const data = await db.readAll();
+    console.log(data);
+    res.json(data);
+  } catch (err) {
+    console.log(err);
+  }
+  //   const response = await axios.get(
+  //     "https://jsonplaceholder.typicode.com/todos/"
+  //   );
+  //   res.json(response.data);
+  // } catch (err) {
+  //   console.log(err.message);
+  // }
+  //send a get request to jsonPlaceholder API and consume the promise using .then/.catch
+  //   const promise = axios.get("https://jsonplaceholder.typicode.com/todos/");
+  //   promise
+  //     .then((response) => {
+  //       res.json(response.data);
+  //     })
+  //     .catch((err) => console.log(err.status));
+  //res is responsible to send data/files
+  //   res.send("<h1>List of all tasks</h1>");
 });
 
-router.get('/', async (req, res) => {
+router.get("/:taskId", async (req, res) => {
   try {
-    const tasks = await db.getAllTasks();
-    res.render('tasks', { tasks });
+    const data = await db.readOne({ _id: new ObjectId(req.params.taskId) });
+    res.json(data);
   } catch (err) {
-    console.error("Error getting all tasks", err);
-    res.status(500).send('Error getting tasks');
+    console.log(err.message);
+  }
+  //send a get request to jsonPlaceholder API and consume the promise using async/await
+  // try {
+  //   const response = await axios.get(
+  //     `https://jsonplaceholder.typicode.com/todos/${req.params.taskId}`
+  //   );
+  //   const userResponse = await axios.get(
+  //     `https://jsonplaceholder.typicode.com/users/${response.data.userId}`
+  //   );
+  //   res.render("task", {
+  //     id: req.params.taskId,
+  //     title: response.data.title,
+  //     user: userResponse.data.name,
+  //     completed: response.data.completed,
+  //   });
+  // } catch (err) {
+  //   console.log(err);
+  // }
+  //res is responsible to send data/files
+  //   console.log(req.params.taskId);
+  //   res.send(`<p>you are viewing task ${req.params.taskId}</p>`);
+});
+router.delete("/:taskId", async (req, res) => {
+  console.log("in router delete ", req.params.taskId);
+  try {
+    const result = await db.deleteOne({ _id: new ObjectId(req.params.taskId) });
+    console.log(result);
+    return res.status(200).json({ message: "Task deleted" }); // ✅ Success response
+
+    // res.redirect("/api/tasks");
+  } catch (err) {
+    console.log("delete router ", err);
   }
 });
-
-router.get('/:taskId', async (req, res) => {
-  try {
-    const taskId = req.params.taskId;
-    console.log("Fetching task with ID:", taskId);
-    const task = await db.getTaskById(taskId);
-    res.render('task', {
-      id: task._id,
-      title: task.title,
-      completed: task.completed,
-      dueDate: task.dueDate  // Include due date
-    });
-  } catch (err) {
-    console.error("Error getting task by id", err);
-    res.status(500).send('Error getting task by id');
-  }
-});
-
-// router.get('/', (req, res) => {
-//   axios.get('https://jsonplaceholder.typicode.com/todos')
-//     .then((response) => {
-//       res.json(response.data);
-//     })
-//     .catch((err) => {
-//       console.error('Error fetching data:', err);
-//       res.status(500).json({ error: 'Failed to fetch tasks' });
-//     });
-// });
-
-// router.get('/:taskId', (req, res) => {
-//   const taskId = req.params.taskId;
-//   axios.get(`https://jsonplaceholder.typicode.com/todos/${taskId}`)
-//     .then(taskResponse => {
-//       const task = taskResponse.data;
-//       return axios.get(`https://jsonplaceholder.typicode.com/users/${task.userId}`)
-//         .then(userResponse => {
-//           const user = userResponse.data;
-//           res.render('task', {
-//             id: task.id,
-//             title: task.title,
-//             completed: task.completed,
-//             userName: user.name
-//           });
-//         });
-//     })
-//     .catch(error => {
-//       console.error('Error fetching data:', error);
-//       res.status(500).send('Failed to fetch task details');
-//     });
-// });
-
 module.exports = router;

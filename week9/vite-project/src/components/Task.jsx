@@ -1,29 +1,28 @@
-import React from 'react';
-import { FaTrash } from 'react-icons/fa';
-import { NavLink } from 'react-router';
+import React from "react";
+import { IoTrashSharp } from "react-icons/io5";
+import { NavLink } from "react-router";
 
-function Task({ task, onDelete }) {
-    return (
-        <li>
-            <NavLink
-              to={`/tasks/${task.id}`}
-              style={({ isActive }) => ({
-                fontWeight: isActive ? 'bold' : 'normal',
-                textDecoration: 'none',
-                color: 'blue'
-              })}
-            >
-              {task.title}
-            </NavLink>
-            <div className="task-container">
-                <div className="task-content">
-                    {/* <p className="task-title">{task.title}</p> */}
-                    <p className="task-date">{task.date}</p>
-                </div>
-                <FaTrash className="delete-icon" onClick={() => onDelete(task.id)} />
-            </div>
-        </li>
-    );
+export default function Task({ taskObj, onDelete }) {
+  function deletePressed() {
+    onDelete(taskObj._id);
+  }
+  return (
+    <li>
+      <div className="taskContainer">
+        <div className="taskTitleIconContainer">
+          <NavLink to={`/tasks/${taskObj._id}`}> {taskObj.title}</NavLink>
+          <IoTrashSharp
+            onClick={deletePressed}
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.code === "Enter") {
+                deletePressed();
+              }
+            }}
+          />
+        </div>
+        <p>{taskObj.date}</p>
+      </div>
+    </li>
+  );
 }
-
-export default Task;

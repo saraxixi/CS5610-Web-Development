@@ -1,82 +1,87 @@
 import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
-import TaskList from "./components/TaskList";
-import {Routes, Route, Link, Outlet } from "react-router"
-import TaskDetails from "./components/TaskDetails";
+import TasksList from "./components/TaskList";
 import AddTask from "./components/AddTask";
+import { Link, NavLink, Route, Routes } from "react-router";
+import TaskDetails from "./components/TaskDetails";
+import LoginButton from "./components/LoginButton";
+import LogoutButton from "./components/LogoutButton";
+import { useAuth0 } from "@auth0/auth0-react";
 import Profile from "./components/Profile";
-// import LoginButton from "./components/LoginButton";
-// import LogoutButton from "./components/LogoutButton";
-import AuthenicationButton from "./components/AuthenicationButton";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { FaBars, FaTimes } from "react-icons/fa";
 
-
-function App() {
-  const [tasks, setTasks] = useState([]);
-
-  async function fetchData() {
-    try {
-      const response = await fetch("http://localhost:5000/tasks");
-      if (response.ok) {
-        const data = await response.json();
-        setTasks(data);
-      }
-    } catch (error) {
-      console.log("fetchData", error);
-    }
-  }
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  async function deleteTask(id) {
-    try {
-      const response = await fetch(`http://localhost:5000/tasks/${id}`, {
-        method: "DELETE",
-      });
-
-      if (response.ok) {
-        fetchData();
-      } else {
-        console.error(`Failed to delete task with id ${id}`);
-      }
-    } catch (error) {
-      console.error("deleteTask error:", error);
-    }
-  }
-
+export default function App() {
+  const { isAuthenticated, isLoading } = useAuth0();
   const [showForm, setShowForm] = useState(false);
-
-  const toggleForm = () => {
-    setShowForm((prev) => !prev);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const toggleShowForm = () => {
+    setShowForm(!showForm);
   };
-
-  const appName = "My React App";
-
-  return (
-    <div className="app-container">
-      <AuthenicationButton />
-      <nav>
-        <Link to="/">Home</Link> | <Link to="/tasks">Tasks</Link> | <Link to="/profile">Profile</Link>
-      </nav>
-      
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      setWindowWidth(window.innerWidth);
+    });
+    return () => {
+      window.removeEventListener("resize", () => {});
+    };
+  }, []);
+  const appName = "My Awesome App";
+  return isLoading ? (
+    <img src="https://cdn.auth0.com/blog/auth0-react-sample/assets/loading.svg" />
+  ) : (
+    <div className="appContainer">
+      <div
+        className="menuIcon"
+        onClick={() => {
+          setMenuOpen(!menuOpen);
+        }}
+      >
+        {menuOpen ? <FaTimes /> : <FaBars />}
+      </div>
+      {(menuOpen || windowWidth > 576) && (
+        <div className="navBar">
+          <nav>
+            <NavLink
+              // className={({ isActive }) => {
+              //   if (isActive) {
+              //     return "activeLink";
+              //   }
+              // }}
+              to="/"
+            >
+              Home
+            </NavLink>
+            <NavLink to="/tasks">Tasks</NavLink>
+            <NavLink to="/profile">Profile</NavLink>
+          </nav>
+          <div>{isAuthenticated ? <LogoutButton /> : <LoginButton />}</div>
+        </div>
+      )}
       <Routes>
-        <Route path="/" element={
-          <>
-          <Header toggleForm={toggleForm} showForm={showForm} appName={appName} />
-          {showForm && <AddTask/>}
-          </>
-        } />
-        <Route path="/tasks" element={<TaskList tasks={tasks} setTasks={setTasks} onDelete={deleteTask} />} >
+        <Route
+          path="/"
+          element={
+            <>
+              <Header
+                myAppName={appName}
+                showForm={showForm}
+                onAddTask={toggleShowForm}
+              />
+              <AddTask />
+            </>
+          }
+        />
+        <Route path="tasks" element={<TasksList />}>
           <Route path=":taskId" element={<TaskDetails />} />
         </Route>
-        
-        <Route path="/profile" element={<ProtectedRoute Component={Profile}/>} />
-        <Route path="*" element={<h1>Not Found</h1>} />
+        <Route
+          path="profile"
+          element={<ProtectedRoute component={Profile} />}
+        />
+        <Route path="*" element={<h1>That page doesn't exist</h1>} />
       </Routes>
     </div>
   );
 }
-
-export default App;
